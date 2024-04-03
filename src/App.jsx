@@ -1,21 +1,25 @@
 import { useState } from 'react'
+import {Route,createBrowserRouter,createRoutesFromElements,RouterProvider} from 'react-router-dom'
 import './App.css'
-import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import HomeCard from './components/HomeCard';
-import JobListing from './components/JobListing';
-import ViewAllJobs from './components/ViewAllJobs';
+import HomePage from './pages/HomePage';
+import MainLayouts from './layouts/MainLayouts';
+import JobsPages from './pages/JobsPages';
+import NotFound from './pages/NotFound';
+
+const router=createBrowserRouter(
+  createRoutesFromElements(
+  <Route path='/' element ={<MainLayouts/>}>
+    <Route index element={<HomePage/>}/>
+    <Route path='/jobs' element={<JobsPages/>}/>
+    <Route path='*' element={<NotFound/>}/>
+  </Route>
+  )
+)
 
 function App() {
  return (
-  <div>
-    <Navbar/>
-    <Hero />
-    <HomeCard/>
-    <JobListing/>
-    <ViewAllJobs/>
+  <RouterProvider router={router}/>
 
-  </div>
  )
 };
 
